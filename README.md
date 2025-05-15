@@ -1,9 +1,12 @@
 # Calculator_FASTAPI
 
+[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-latest-green.svg)](https://fastapi.tiangolo.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A simple, modular calculator API built with FastAPI. This project follows the [12-Factor App](https://12factor.net/) methodology and demonstrates best practices for developing maintainable and scalable web applications.
 
-## Table of Contents
-
+**Table of Contents**
 - [Project Overview](#project-overview)
 - [Features](#features)
 - [Project Structure](#project-structure)
@@ -15,123 +18,166 @@ A simple, modular calculator API built with FastAPI. This project follows the [1
 - [12-Factor App Implementation](#12-factor-app-implementation)
 - [License](#license)
 
-## Project Overview
+**Project Overview**
 
 This API performs basic arithmetic operations and is designed using FastAPI. It is containerized with Docker, uses environment-based configuration, and includes a test suite. The structure supports scalability, modularity, and maintainability.
 
-## Features
+**Features**
+* RESTful API using FastAPI
+* Basic arithmetic operations: addition, subtraction, multiplication, division
+* Environment-based configuration
+* Docker containerization
+* Automated testing using Pytest
+* Documentation using MkDocs
 
-- RESTful API using FastAPI  
-- Basic arithmetic operations: addition, subtraction, multiplication, division  
-- Environment-based configuration  
-- Docker containerization  
-- Automated testing using Pytest  
-- Documentation using MkDocs
+**Project Structure**
 
-## Project Structure
+```
+Calculator_FASTAPI/
+├── docs/
+│   ├── guide/
+│   │   └── getting-started.md
+│   ├── index.md
+│   └── mkdocs.yml
+├── requirements/
+│   ├── requirements.txt
+│   ├── requirements-dev.txt
+│   └── requirements-test.txt
+├── src/
+│   ├── apps/
+│   ├── tests/
+│   ├── main.py
+│   └── serve.py
+├── .env
+├── .gitignore
+├── Dockerfile
+├── docker-compose.yaml
+├── Makefile
+├── pytest.ini
+├── pyproject.toml
+├── README.md
+└── LICENSE
+```
 
-calculator-fastapi/
-├── docs/                   # Documentation files
-│   ├── api/                # API usage docs
-│   ├── development/        # Development guides
-│   ├── img/                # Images for documentation
-│   └── index.md            # Documentation home page
-├── requirements/           # Dependency files
-│   ├── requirements.txt    # Production dependencies
-│   ├── requirements-dev.txt  # Development dependencies
-│   └── requirements-test.txt # Testing dependencies
-├── src/                    # Source code
-│   ├── api/                # API endpoints
-│   │   ├── __init__.py
-│   │   ├── calculator.py   # Calculator routes
-│   │   └── router.py       # API router setup
-│   ├── core/               # Core application code
-│   │   ├── __init__.py
-│   │   ├── config.py       # Configuration handling
-│   │   └── exceptions.py   # Custom exceptions
-│   ├── services/           # Business logic
-│   │   ├── __init__.py
-│   │   └── calculator.py   # Calculator operations
-│   ├── tests/              # Test suite
-│   │   ├── __init__.py
-│   │   ├── conftest.py     # Test configuration
-│   │   ├── test_api.py     # API tests
-│   │   └── test_services.py # Service tests
-│   ├── main.py             # FastAPI application setup
-│   └── serve.py            # Application entry point
-├── .env.example            # Example environment variables
-├── .gitignore              # Git ignore file
-├── docker-compose.yml      # Docker Compose configuration
-├── Dockerfile              # Docker configuration
-├── LICENSE                 # License file
-├── Makefile                # Make commands for common tasks
-├── pyproject.toml          # Project metadata and configuration
-└── README.md               # Project documentation
-bash
-Copy
-Edit
+**Getting Started**
 
-## Getting Started
+**Prerequisites**
+* Python 3.8+
+* Docker and Docker Compose (optional)
 
-### Prerequisites
+**Installation**
+1. **Clone the repository:**
 
-- Python 3.8+  
-- Docker and Docker Compose (optional)
+```
+git clone https://github.com/yourusername/Calculator_FASTAPI.git
+cd Calculator_FASTAPI
+```
 
-### Installation
+2. **Create and activate a virtual environment:**
 
-# Clone repository
-git clone https://github.com/yourusername/calculator-fastapi.git
-cd calculator-fastapi
-
-# Set up virtual environment
+```
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-# Install dependencies
-pip install -r requirements/requirements.txt
+3. **Install dependencies:**
 
-# Copy example environment file and modify as needed
+```
+pip install -r requirements/requirements-dev.txt
+```
+
+4. **Set up environment variables:**
+
+```
 cp .env.example .env
+```
 
-# Run the application
+5. **Run the application:**
+
+```
 python src/serve.py
-Visit http://localhost:8000/docs to see the interactive API documentation.
-Docker Installation
-bash# Build and start the container
+```
+
+**Usage**
+
+**Send HTTP Requests**
+* Use any HTTP client to interact with the API endpoints.
+* All operations accept JSON payloads.
+
+**Example Request:**
+
+```
+POST /add
+Content-Type: application/json
+
+{
+  "a": 5,
+  "b": 3
+}
+```
+
+**Example Response:**
+
+```
+{
+  "result": 8,
+  "operation": "add"
+}
+```
+
+**Docker**
+
+**Container Deployment**
+* Build and run using Docker Compose:
+
+```
 docker-compose up -d
+```
 
-# View logs
-docker-compose logs -f
+* Access the API docs at http://localhost:8000/docs
 
-### Configuration
-The application uses environment variables for configuration:
-VariableDescriptionDefaultHOSTHost to bind the server0.0.0.0PORTPort to bind the server8000LOG_LEVELLogging levelINFOENVIRONMENTApplication environmentdevelopment
+**API Endpoints**
 
-### 12-Factor App Implementation
-This project follows the 12-Factor App methodology:
+| Method | Endpoint   | Description                   |
+|--------|------------|-------------------------------|
+| POST   | /add       | Add two numbers               |
+| POST   | /subtract  | Subtract one number from another |
+| POST   | /multiply  | Multiply two numbers          |
+| POST   | /divide    | Divide one number by another  |
 
-Codebase: One version-controlled repository
-Dependencies: Explicitly declared and isolated
-Config: Stored in environment variables
-Backing Services: N/A (stateless calculator)
-Build, Release, Run: Separated stages via Dockerfile
-Processes: Stateless processes
-Port Binding: Self-contained with port binding
-Concurrency: Scales horizontally via process model
-Disposability: Fast startup and graceful shutdown
-Dev/Prod Parity: Similar environments via Docker
-Logs: Output as event streams
-Admin Processes: Admin/maintenance tasks as one-offs
+**Testing**
 
-### Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
+**Run Basic Tests**
+* Execute the test suite:
 
-Fork the repository
-Create your feature branch (git checkout -b feature/amazing-feature)
-Commit your changes (git commit -m 'Add some amazing feature')
-Push to the branch (git push origin feature/amazing-feature)
-Open a Pull Request
+```
+pytest
+```
 
-### License
-Distributed under the MIT License. See LICENSE for more information.
+**Run Tests with Coverage**
+* Get coverage metrics:
+
+```
+pytest --cov=src tests/
+```
+
+**12-Factor App Implementation**
+
+This project adheres to the 12-Factor principles:
+
+1. **Codebase**: One codebase tracked in version control, many deploys
+2. **Dependencies**: Explicitly declared and isolated in requirement files
+3. **Config**: Config stored in environment variables
+4. **Backing Services**: Treated as attached resources
+5. **Build, Release, Run**: Clearly separated stages
+6. **Processes**: Stateless processes
+7. **Port Binding**: Services exported via port binding
+8. **Concurrency**: Supports horizontal scaling
+9. **Disposability**: Fast startup and graceful shutdown
+10. **Dev/Prod Parity**: Similar environments for dev and prod
+11. **Logs**: Output as event streams
+12. **Admin Processes**: Run management tasks as one-off processes
+
+**License**
+
+Distributed under the MIT License. See `LICENSE` for more information.
