@@ -13,9 +13,6 @@ bashpython -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 Install Dependencies
 bashpip install -r requirements/dev.txt
-Set Up Environment Variables
-bashcp .env.example .env
-Edit the .env file to customize your configuration:
 APP_NAME=Calculator API
 APP_VERSION=0.1.0
 DEBUG_MODE=True
