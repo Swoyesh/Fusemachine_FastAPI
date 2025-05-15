@@ -1,0 +1,5 @@
+site_name: "Calculator using FASTAPI"
+#
+site_description: "API documentation for the Calculator application"
+#
+site_author: "Swoyesh Shrestha"
