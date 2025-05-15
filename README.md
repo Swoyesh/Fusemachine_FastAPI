@@ -1,67 +1,82 @@
-# Simple Calulator using FastAPI - my-fastapi-app
+Calculator API
+A simple calculator API built with FastAPI that follows the 12-Factor App methodology.
+Features
 
-- The requirements are located in `requirements.txt` and you can locally run `make requirements`.
-It will install the dev requirements as well.
-- Uses cookiecutter to generate the template project
-- [FastAPI](https://fastapi.tiangolo.com/) is used for the tests with [pytest](https://docs.pytest.org/en/latest/)
+Basic arithmetic operations (add, subtract, multiply, divide)
+RESTful API using FastAPI
+Docker containerization
+Environment-based configuration
+Comprehensive test suite
+CI/CD pipeline using GitHub Actions
 
-Comes with some pre-built routes, paths, apps and [Tortoise ORM](https://tortoise.github.io/_modules/tortoise/fields/data.html)
-integrated.
+12-Factor App Implementation
+This project implements the following 12-Factor principles:
 
-This project also bring a default AbstractUser (like) django where
-it allows the creation of a superuser and a normal user like django as well.
----
+Codebase: One codebase tracked in version control, many deploys
+Dependencies: Explicitly declare and isolate dependencies
+Config: Store config in the environment
+Backing services: Treat backing services as attached resources
+Build, release, run: Strictly separate build and run stages
+Processes: Execute the app as one or more stateless processes
+Port binding: Export services via port binding
+Concurrency: Scale out via the process model
+Disposability: Maximize robustness with fast startup and graceful shutdown
+Dev/prod parity: Keep development, staging, and production as similar as possible
+Logs: Treat logs as event streams
+Admin processes: Run admin/management tasks as one-off processes
 
-## Table of Contents
+Getting Started
+Prerequisites
 
-- [Simple Calulator using FastAPI - my-fastapi-app](#-cookiecutterdescription-----cookiecutterproject_name-)
-    - [it allows the creation of a superuser and a normal user like django as well.](#it-allows-the-creation-of-a-superuser-and-a-normal-user-like-django-as-well)
-    - [Table of Contents](#table-of-contents)
-    - [Overview](#overview)
-    - [Requirements](#requirements)
-    - [How to install](#how-to-install)
-    - [Run locally](#run-locally)
-    - [Configurations](#configurations)
-    - [Run tests](#run-tests)
+Python 3.8+
+Docker and Docker Compose (optional)
 
----
+Local Development
 
-## Overview
+Clone the repository:
+bashgit clone https://github.com/Swoyesh/Fusemachine_FastAPI.git
+cd calculator-fastapi
 
-This is a simple boilerplate that helps spinning up fastapi apps for your own use cases.
+Create a virtual environment and install dependencies:
+bashpython -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements/dev.txt
 
-## Requirements
+Set up environment variables:
+bashcp .env.example .env
 
-- Python 3.8 or above
-- (Optional) Virtualenv (or pyenv, venv...)
-- [Python Web Extras](https://github.com/tarsil/python-web-extras)
-- Cookiecutter (to install the template)
+Run the application:
+bashpython serve.py
 
-## How to install
+Access the API documentation at http://localhost:8000/docs
 
- 1. Install cookiecutter. Instructions [here](https://cookiecutter.readthedocs.io/en/1.7.2/installation.html)
- 2. Run `cookiecutter https://github.com/tarsil/cookiecutter-fastapi` and follow the instructions.
- 3. `make requirements-dev` - Installs all the requirements needed for dev.
- 4. `make requirements` (No need if 3. run) - Installs all the requirements base.
+Using Docker
 
-## Run locally
+Build and run using Docker Compose:
+bashdocker-compose up -d
 
-- `make run-dev` or if you wish to run with a different set of settings:
-    1. `make serve-special FASTAPI_SETTINGS_MODULE=name_of_module.file`
+Access the API documentation at http://localhost:8000/docs
 
-- You should be able to access `http://127.0.0.1:8002/` and test the endpoint.
+API Endpoints
 
-## Configurations
+POST /add - Add two numbers
+POST /subtract - Subtract one number from another
+POST /multiply - Multiply two numbers
+POST /divide - Divide one number by another
 
-The project comes with pre-set of configurations located at
-`Calculator_FASTAPI/src/core/configs/`.
-
- 1. `settings.py` is the main default settings config.
- 2. `make migrate`. Runs the current migrations inside the `migration` folder
- 3. `make` to list all the available commands for the project.
-
-For more info about the migrations and the tool used [aerich](https://github.com/tortoise/aerich).
-
-## Run tests
-
-- `make test` - Runs all the standard tests.
+Example Request/Response
+Request:
+jsonPOST /add
+{
+  "a": 5,
+  "b": 3
+}
+Response:
+json{
+  "result": 8,
+  "operation": "add"
+}
+Running Tests
+bashpytest
+Or with coverage:
+bashpytest --cov=my_app tests/

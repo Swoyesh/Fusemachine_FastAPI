@@ -22,6 +22,9 @@ class Settings(BaseModel):
 
 settings = Settings.from_env()
 
+def get_settings():
+    return settings
+
 # Define request models
 class CalculationRequest(BaseModel):
     a: float
@@ -48,6 +51,10 @@ app = FastAPI(
     debug=settings.debug_mode,
     lifespan=lifespan
 )
+
+@app.get("/")
+async def root():
+    return {"message": "API is running!"}
 
 #Calculator endpoints
 @app.post("/add", response_model=CalculationResponse)
