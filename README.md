@@ -12,23 +12,27 @@ A simple, modular calculator API built with FastAPI. This project follows the [1
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
-- [Docker](#docker)
 - [API Endpoints](#api-endpoints)
 - [Testing](#testing)
 - [12-Factor App Implementation](#12-factor-app-implementation)
 - [License](#license)
 
+---
+
 **Project Overview**
 
-This API performs basic arithmetic operations and is designed using FastAPI. It is containerized with Docker, uses environment-based configuration, and includes a test suite. The structure supports scalability, modularity, and maintainability.
+This API performs basic arithmetic operations and is designed using FastAPI. It uses environment-based configuration and includes a comprehensive test suite. The structure supports scalability, modularity, and maintainability.
+
+---
 
 **Features**
 * RESTful API using FastAPI
 * Basic arithmetic operations: addition, subtraction, multiplication, division
 * Environment-based configuration
-* Docker containerization
 * Automated testing using Pytest
 * Documentation using MkDocs
+
+---
 
 **Project Structure**
 
@@ -50,8 +54,6 @@ Calculator_FASTAPI/
 │   └── serve.py
 ├── .env
 ├── .gitignore
-├── Dockerfile
-├── docker-compose.yaml
 ├── Makefile
 ├── pytest.ini
 ├── pyproject.toml
@@ -59,11 +61,12 @@ Calculator_FASTAPI/
 └── LICENSE
 ```
 
+---
+
 **Getting Started**
 
 **Prerequisites**
 * Python 3.8+
-* Docker and Docker Compose (optional)
 
 **Installation**
 1. **Clone the repository:**
@@ -98,6 +101,8 @@ cp .env.example .env
 python src/serve.py
 ```
 
+---
+
 **Usage**
 
 **Send HTTP Requests**
@@ -125,16 +130,7 @@ Content-Type: application/json
 }
 ```
 
-**Docker**
-
-**Container Deployment**
-* Build and run using Docker Compose:
-
-```
-docker-compose up -d
-```
-
-* Access the API docs at http://localhost:8000/docs
+---
 
 **API Endpoints**
 
@@ -144,6 +140,8 @@ docker-compose up -d
 | POST   | /subtract  | Subtract one number from another |
 | POST   | /multiply  | Multiply two numbers          |
 | POST   | /divide    | Divide one number by another  |
+
+---
 
 **Testing**
 
@@ -161,6 +159,36 @@ pytest
 pytest --cov=src tests/
 ```
 
+**Filter Tests**
+* Run tests by keyword:
+
+```
+pytest -k "add"
+```
+
+**Run Specific Test File**
+* Execute tests from a specific file:
+
+```
+pytest src/tests/test_calculator.py
+```
+
+**Generate HTML Coverage Report**
+* Create detailed HTML coverage report:
+
+```
+pytest --cov=src --cov-report=html tests/
+```
+
+**Verbose Output**
+* See detailed test information:
+
+```
+pytest -v
+```
+
+---
+
 **12-Factor App Implementation**
 
 This project adheres to the 12-Factor principles:
@@ -177,6 +205,8 @@ This project adheres to the 12-Factor principles:
 10. **Dev/Prod Parity**: Similar environments for dev and prod
 11. **Logs**: Output as event streams
 12. **Admin Processes**: Run management tasks as one-off processes
+
+---
 
 **License**
 
